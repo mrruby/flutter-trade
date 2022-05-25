@@ -9,6 +9,7 @@ import 'package:flutter_trade/models/data_entry.dart';
 import 'package:flutter_trade/models/data_list.dart';
 import 'package:flutter_trade/widgets/loading_indicator.dart';
 import 'package:flutter_trade/widgets/table.dart';
+import 'package:flutter_trade/widgets/table_header.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -96,7 +97,8 @@ class _HomePageState extends State<HomePage>
                       ),
                       Row(
                         children: [
-                          TextButton(
+                          TableHeader(
+                              text: "Symbol",
                               onPressed: () => setState(() {
                                     final sort = symbolSort(appState.sortType);
                                     appState = appState.copyWith(
@@ -107,27 +109,27 @@ class _HomePageState extends State<HomePage>
                                             sort),
                                         sortType: sort);
                                   }),
-                              child: Text(
-                                  "${symbolFormat(appState.sortType)}Symbol")),
+                              sortState: symbolSortState(appState.sortType)),
                           Expanded(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                TextButton(
-                                    onPressed: () => setState(() {
-                                          final sort =
-                                              priceSort(appState.sortType);
-                                          appState = appState.copyWith(
-                                              sortType: sort,
-                                              showState: applyFiltersAndSearch(
-                                                  baseList,
-                                                  _tabController.index,
-                                                  _textController.text,
-                                                  sort));
-                                        }),
-                                    child: Text(
-                                        "${priceFormat(appState.sortType)}Last Price")),
-                                TextButton(
+                                TableHeader(
+                                  text: "Last Price",
+                                  sortState: priceSortState(appState.sortType),
+                                  onPressed: () => setState(() {
+                                    final sort = priceSort(appState.sortType);
+                                    appState = appState.copyWith(
+                                        sortType: sort,
+                                        showState: applyFiltersAndSearch(
+                                            baseList,
+                                            _tabController.index,
+                                            _textController.text,
+                                            sort));
+                                  }),
+                                ),
+                                TableHeader(
+                                    sortState: volSortState(appState.sortType),
                                     onPressed: () => setState(() {
                                           final sort =
                                               volSort(appState.sortType);
@@ -139,8 +141,7 @@ class _HomePageState extends State<HomePage>
                                                   sort),
                                               sortType: sort);
                                         }),
-                                    child: Text(
-                                        "${volFormat(appState.sortType)}Volume")),
+                                    text: "Volume"),
                               ],
                             ),
                           ),

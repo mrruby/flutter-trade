@@ -1,5 +1,6 @@
 import 'package:flutter_trade/models/data_entry.dart';
 import 'package:flutter_trade/models/data_type.dart';
+import 'package:flutter_trade/models/sort_state.dart';
 import 'package:flutter_trade/models/sort_type.dart';
 import 'package:intl/intl.dart';
 
@@ -10,34 +11,34 @@ formatNumber(num myNumber) {
   return '\$${numberFormat.format(myNumber)}';
 }
 
-String symbolFormat(SortType currentSortType) {
+SortState symbolSortState(SortType currentSortType) {
   if (currentSortType == SortType.SymbolAsc) {
-    return "↓";
+    return SortState.Down;
   }
   if (currentSortType == SortType.SymbolDesc) {
-    return "↑";
+    return SortState.Up;
   }
-  return '';
+  return SortState.None;
 }
 
-String priceFormat(SortType currentSortType) {
+SortState priceSortState(SortType currentSortType) {
   if (currentSortType == SortType.PriceAsc) {
-    return "↓";
+    return SortState.Down;
   }
   if (currentSortType == SortType.PriceDesc) {
-    return "↑";
+    return SortState.Up;
   }
-  return '';
+  return SortState.None;
 }
 
-String volFormat(SortType currentSortType) {
+SortState volSortState(SortType currentSortType) {
   if (currentSortType == SortType.VolAsc) {
-    return "↓";
+    return SortState.Down;
   }
   if (currentSortType == SortType.VolDesc) {
-    return "↑";
+    return SortState.Up;
   }
-  return '';
+  return SortState.None;
 }
 
 formatPrice(num price) {
