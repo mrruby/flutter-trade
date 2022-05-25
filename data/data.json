@@ -64,7 +64,6 @@
   },
   {
     "base": "XRP",
-
     "quote": "USDT",
     "type": "SPOT",
     "lastPrice": 0.8633,
